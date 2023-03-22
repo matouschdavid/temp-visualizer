@@ -9,7 +9,7 @@ function OpenMap(props) {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <WeatherInfo></WeatherInfo>
+      <WeatherInfo mapMode="openMaps"></WeatherInfo>
     </MapContainer>
   );
 }

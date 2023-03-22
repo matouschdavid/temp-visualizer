@@ -26,10 +26,7 @@ const options = {
 };
 
 function Map() {
-  const [bounds, setBounds] = React.useState({
-    topLeft: { lat: 0, lng: 0 },
-    bottomRight: { lat: 0, lng: 0 },
-  });
+  const [bounds, setBounds] = React.useState(null);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -54,17 +51,17 @@ function Map() {
     function callback() {
       if (map == null) return;
 
-      function getBounds() {
-        var bounds = map.getBounds();
-        var ne = bounds.getNorthEast();
-        var sw = bounds.getSouthWest();
+      // function getBounds() {
+      //   var bounds = map.getBounds();
+      //   var ne = bounds.getNorthEast();
+      //   var sw = bounds.getSouthWest();
 
-        return {
-          topLeft: { lat: ne.lat(), lng: sw.lng() },
-          bottomRight: { lat: sw.lat(), lng: ne.lng() },
-        };
-      }
-      setBounds(getBounds());
+      //   return {
+      //     topLeft: { lat: ne.lat(), lng: sw.lng() },
+      //     bottomRight: { lat: sw.lat(), lng: ne.lng() },
+      //   };
+      // }
+      setBounds(map.getBounds());
     },
     [map]
   );
@@ -79,7 +76,7 @@ function Map() {
       options={options}
       onBoundsChanged={onBoundsChanged}
     >
-      <WeatherInfo bounds={bounds}></WeatherInfo>
+      <WeatherInfo mapMode="google" bounds={bounds}></WeatherInfo>
     </GoogleMap>
   ) : (
     <></>
